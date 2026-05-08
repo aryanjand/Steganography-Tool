@@ -1,0 +1,7 @@
+#!/usr/bin/env python3
+from steg.cli import decode_main
+
+
+if __name__ == "__main__":
+    raise SystemExit(decode_main())
+
