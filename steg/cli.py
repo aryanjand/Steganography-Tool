@@ -1,10 +1,10 @@
+from typing import Optional
 import argparse
 import sys
 
 from .constants import DEFAULT_DECODE_OUTPUT
 from .errors import StegError
 from .pipeline import run_decode, run_encode
-
 
 class StrictArgumentParser(argparse.ArgumentParser):
     def error(self, message):
@@ -34,7 +34,7 @@ def _decode_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def _main(fn, parser: argparse.ArgumentParser, argv: list[str] | None = None) -> int:
+def _main(fn, parser: argparse.ArgumentParser, argv: Optional[list[str]] = None) -> int:
     try:
         args = parser.parse_args(argv)
         fn(args)
@@ -47,7 +47,7 @@ def _main(fn, parser: argparse.ArgumentParser, argv: list[str] | None = None) ->
         return 1
 
 
-def encode_main(argv: list[str] | None = None) -> int:
+def encode_main(argv: Optional[list[str]] = None) -> int:
     parser = _encode_parser()
 
     def run(args):
@@ -56,7 +56,7 @@ def encode_main(argv: list[str] | None = None) -> int:
     return _main(run, parser, argv)
 
 
-def decode_main(argv: list[str] | None = None) -> int:
+def decode_main(argv: Optional[list[str]] = None) -> int:
     parser = _decode_parser()
 
     def run(args):
